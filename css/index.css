@@ -19,15 +19,18 @@
  	display: flex;
  	justify-content: center;
  	align-items: center;
+ 	transition: 0.5s;
  }
 
  .colorline, #welcome, #bcg {
  	width: 100vw;
  	height: 100vh;
+ 	transition: 0.5s;
  }
 
  #welcome {
  	font-size: 10rem;
+ 	transition: 0.5s;
  	/* background-color: rgb(255, 255, 255); */
  }
 
@@ -42,6 +45,7 @@
  	justify-content: center;
  	color: white;
  	background-color: black;
+ 	transition: 0.5s;
  }
 
  #canvas {
@@ -49,6 +53,7 @@
  	width: 100vw;
  	height: 100vh;
  	z-index: 99;
+ 	transition: 0.5s;
  }
 
  #bcg {
@@ -59,6 +64,7 @@
  	flex-wrap: wrap;
  	overflow: hidden;
  	z-index: 2;
+ 	transition: 0.5s;
  }
 
  #bcg div {
@@ -70,6 +76,7 @@
  	align-content: center;
  	justify-items: center;
  	justify-content: center;
+ 	transition: 0.5s;
  }
 
  canvas {
@@ -81,6 +88,7 @@
  	z-index: 3;
  	pointer-events: none;
  	mix-blend-mode: difference;
+ 	transition: 0.5s;
  }
 
  /* 
@@ -104,4 +112,5 @@
  	display: flex;
  	justify-content: center;
  	align-items: center;
+ 	transition: 0.5s;
  }

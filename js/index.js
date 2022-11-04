@@ -3,12 +3,14 @@
 //   yield loadColor()
 // }
 window.onload = function () {
+  window.mdc = '';
   this.app = document.getElementById('app');
   this.welcome = document.createElement('div');
   this.canvas = document.createElement('canvas');
   loadWelcome();
   loadColor();
   loadCanvas();
+  loadbtn();
 };
 const colors = [
   {
@@ -127,7 +129,8 @@ function loadWelcome() {
       <a color="${f.color}" 
         style="background:#${f.color};color:black;text-align: center;" 
         href="#${f.name + '-' + f.color}"
-        md="${f.name + '-' + f.color}">
+        colorName="${f.name}"
+        color="${f.name}">
         ${f.name}
       </a>`;
     bcg.appendChild(div);
@@ -148,7 +151,7 @@ function loadCanvas() {
   let mouseY = height / 2;
 
   let circle = {
-    radius: 30,
+    radius: 50,
     lastX: mouseX,
     lastY: mouseY,
   };
@@ -171,6 +174,11 @@ function loadCanvas() {
     ctx.beginPath();
     ctx.arc(circle.lastX, circle.lastY, circle.radius, 0, Math.PI * 2, false);
     ctx.fillStyle = fillStyle;
+    ctx.moveTo(300, 300);
+    ctx.font = '20px "微软雅黑"'; //设置字体
+    ctx.font = '30px Verdana';
+    //设置线性渐变色
+    ctx.fillText(window.mdc, 20, 50);
     ctx.fill();
     ctx.closePath();
 
@@ -196,9 +204,14 @@ function loadCanvas() {
     elems.forEach(el => {
       el.addEventListener(
         'mouseenter',
-        () => {
-          console.log(el);
+        e => {
           ctx.fillStyle = el.style.background;
+          window.mdc =
+            el.getAttribute('colorName') + ' #' + el.getAttribute('color');
+          const ele = document.querySelector('.title');
+          console.log(ele);
+          ele.innerHTML = window.mdc;
+          ele.style.color = '#' + el.getAttribute('color');
           requestAnimationFrame(render);
           tween.play();
         },
@@ -233,4 +246,15 @@ function loadColor() {
     container.appendChild(div);
   });
   app.appendChild(container);
+}
+function loadbtn() {
+  const btnlist = [
+    document.createElement('button'),
+    document.createElement('button'),
+    document.createElement('button'),
+  ];
+  btnlist.forEach((f, i) => {
+    f.id = 'btn' + i + 1;
+    f.className = 'btn' + i + 1;
+  });
 }
