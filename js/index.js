@@ -245,9 +245,11 @@ function loadColor() {
 }
 function loadbtn() {
   const btnlist = document.createElement('button');
+  const topBtn = document.createElement('button');
+
   btnlist.id = 'btn' + 1;
   btnlist.className = 'btn' + 1 + ' btn-right button';
-  btnlist.innerHTML = '隐藏模式';
+  btnlist.innerHTML = '栅格模式';
   btnlist.addEventListener('click', function (e) {
     const text = e.target.textContent;
     if (text == '隐藏模式') {
@@ -258,14 +260,20 @@ function loadbtn() {
       e.target.textContent = '栅格模式';
     } else {
       document.getElementsByClassName('title')[0].style = `
-        background:rgba(0, 0, 0, 0);
         Visibility:hidden;
+        background:rgba(0, 0, 0, 0);
       `;
       e.target.textContent = '隐藏模式';
     }
-    setScroll();
   });
+
+  topBtn.id = 'btn' + 1;
+  topBtn.className = 'btn' + 1 + ' btn-right button';
+  topBtn.innerHTML = '回到顶部';
+  topBtn.style = `top:60px;`;
+  topBtn.addEventListener('click', setScroll);
   app.appendChild(btnlist);
+  app.appendChild(topBtn);
 }
 // 回到顶部
 function setScroll() {
