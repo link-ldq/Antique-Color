@@ -1,7 +1,3 @@
-// function* init() {
-//   yield loadWelcome()
-//   yield loadColor()
-// }
 window.onload = function () {
   window.mdc = '';
   this.app = document.getElementById('app');
@@ -248,13 +244,47 @@ function loadColor() {
   app.appendChild(container);
 }
 function loadbtn() {
-  const btnlist = [
-    document.createElement('button'),
-    document.createElement('button'),
-    document.createElement('button'),
-  ];
-  btnlist.forEach((f, i) => {
-    f.id = 'btn' + i + 1;
-    f.className = 'btn' + i + 1;
+  const btnlist = document.createElement('button');
+  btnlist.id = 'btn' + 1;
+  btnlist.className = 'btn' + 1 + ' btn-right button';
+  btnlist.innerHTML = '隐藏模式';
+  btnlist.addEventListener('click', function (e) {
+    const text = e.target.textContent;
+    if (text == '隐藏模式') {
+      document.getElementsByClassName('title')[0].style = `
+        background:black;
+        Visibility:visible;
+      `;
+      e.target.textContent = '栅格模式';
+    } else {
+      document.getElementsByClassName('title')[0].style = `
+        background:rgba(0, 0, 0, 0);
+        Visibility:hidden;
+      `;
+      e.target.textContent = '隐藏模式';
+    }
+    setScroll();
   });
+  app.appendChild(btnlist);
 }
+// 回到顶部
+function setScroll() {
+  let timer = setInterval(() => {
+    let base = getScroll();
+    console.log(tag);
+    if (base <= 1 || tag) {
+      // 当滚轮往下滚动时tag为true，停止到达顶部
+      clearInterval(timer);
+    }
+    document.documentElement.scrollTop = base - Math.pow(base, 3 / 5); // 速度可自己调整
+  }, 20);
+}
+// 获取当前位置到顶部的距离
+function getScroll() {
+  return (
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop
+  );
+}
+let tag = false;
